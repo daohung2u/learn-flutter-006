@@ -1,4 +1,6 @@
+import 'package:bmi_calculator/bmi_brain.dart';
 import 'package:bmi_calculator/pages/result_page.dart';
+import 'package:bmi_calculator/widgets/bottom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../widgets/my_card.dart';
@@ -217,28 +219,19 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
+          BottomButton(
+            title: "CALCULATOR",
             onTap: () {
+              BmiBrain bmi = BmiBrain();
+
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ResultPage();
+                return ResultPage(
+                  bmi: bmi.getBmi(),
+                  result: bmi.getResult(),
+                  hint: bmi.getInterpretation(),
+                );
               }));
             },
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'CALCULATOR YOUR BMI',
-                    style: TextStyle(fontSize: headerSize),
-                  )
-                ],
-              ),
-              width: double.infinity,
-              height: 80,
-              margin: EdgeInsets.only(top: 10.0),
-              color: footerColor,
-            ),
           )
         ],
       ),
